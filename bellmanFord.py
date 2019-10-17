@@ -14,13 +14,16 @@ class Graph:
 
     def BellmanFord(self, S):
 
+        # initialization
         dist = [inf] * self.V
         dist[S] = 0
 
+        # n-1 rounds
         for i in range(self.V - 1):
             for u, v, w in self.graph:
                 dist[v] = min([dist[v], dist[u]+w])
 
+        # final round: check for negative cycle
         for u, v, w in self.graph:
             if dist[u] + w < dist[v]:
                 return False
