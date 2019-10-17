@@ -2,20 +2,26 @@ import math
 
 inf = math.inf
 
-graph1 = [[inf, inf, 9],
-          [inf, inf, 12],
-          [-2, -1, inf]]
+# graph1 = [[0, inf, 9],
+#           [inf, 0, 12],
+#           [-2, -1, 0]]
 
-D1 = [[7, 8, 9],
-      [10, 13, -1],
-      [-2, -1, -7]]
+# D1 = [[7, 8, 9],
+#       [10, 13, -1],
+#       [-2, -1, -7]]
 
-graph2 = [[0,   5,  inf, 10],
-          [inf,  0,  3,  inf],
-          [inf, inf, 0,   1],
-          [inf, inf, inf, 0]]
+# from http://cognitive-robotics17.csail.mit.edu/docs/tutorials/Tutorial3_Temporal_Networks_for_Dynamic_Scheduling_Revised.pdf
+graph2 = [[0, inf, inf, inf, 250],
+          [-4, 0, inf, inf, 168],
+          [inf, 0, 0, inf,  inf],
+          [inf, inf, -120, 0, 7],
+          [inf, inf, inf, 0, 0]]
 
-D2 = [[0, 5, 8, 9], [inf, 0, 3, 4], [inf, inf, 0, 1], [inf, inf, inf, 0]]
+D2 = [[0, 130, 130, 250, 250],
+      [-4, 0, 48, 168, 168],
+      [-4, 0, 0, 168, 168],
+      [-124, -120, -120, 0, 7],
+      [-124, -120, -120, 0, 0]]
 
 labels = {0: 'Z', 1: 'X1', 2: 'X2'}
 labelsF = {'Z': 0, 'X1': 1, 'X2': 2}
@@ -39,8 +45,8 @@ def floyd(graph):
                       k, graph)
 
 
-floyd(graph1)
+# floyd(graph1)
 floyd(graph2)
 
-assert(graph1 == D1)
+# assert(graph1 == D1)
 assert(graph2 == D2)
