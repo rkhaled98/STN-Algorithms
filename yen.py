@@ -32,11 +32,27 @@ class graph:
         self.incomingHowMany[toNode] += 1
         self.outgoingHowMany[fromNode] += 1
 
-    def checkNegativeCycle(self, P):
-        if sum(P) < 0:
+    def checkNegativeCycle(self, parent):
+        if parent[0] != 0:
             return True
-        else:
-            return False
+        n = len(parent)
+        visitLevel = [0]*n
+
+        level = n
+        for i in range(n-1,-1,-1):
+            if visitLevel[i] > level:
+                continue
+            visitLevel[i] = level
+            p = parent[i]
+            while p != 0:
+                if visitLevel[p] == level:
+                    return True
+                if visitLevel[p] > level:
+                    break
+                visitLevel[p] = level
+                p = parent[p]
+            level-=1
+        return False
 
     def Yen(self, S):
         e_plus = graph(self.shape)
@@ -80,8 +96,13 @@ class graph:
         return d
 
 
-m = {'x': 0, 'y': 1, 'z': 2}
+v = {'z': 0, '1': 1, '2': 2}
 
 g = graph(3)
-g.addEdge(m['x'], 5, m['y'])
-g.test()
+
+g.addEdge(v['z'], 12, v['2'])
+g.addEdge(v['1'], -4, v['z'])
+g.addEdge(v['2'], -3, v['1'])
+g.addEdge(v['1'], 6, v['2'])
+
+print(g.Yen(0))
